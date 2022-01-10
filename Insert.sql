@@ -285,12 +285,6 @@ INSERT INTO schedule_student VALUES(1, 32);
 INSERT INTO schedule_student VALUES(1, 33);
 
 
-CREATE VIEW number_booked_students AS 
-SELECT lesson_id, COUNT(*) AS booked_students 
-FROM schedule_student 
-GROUP BY lesson_id
-ORDER BY lesson_id;
-
 INSERT INTO brands VALUES(DEFAULT, 'Yamaha');
 INSERT INTO brands VALUES(DEFAULT, 'Akai');
 INSERT INTO brands VALUES(DEFAULT, 'Arturia');
@@ -316,4 +310,18 @@ INSERT INTO rented_instrument VALUES(DEFAULT, 6, 3, '2021-01-01', '2021-06-01');
 INSERT INTO rented_instrument VALUES(DEFAULT, 11, 5, '2022-01-01', '2022-06-01');
 INSERT INTO rented_instrument VALUES(DEFAULT, 5, 1, '2021-01-01', '2021-06-01');
 
+
 INSERT INTO schedule VALUES(DEFAULT, '17:00', '19:00', '2022-01-08', 2, 2, 1);
+
+
+INSERT INTO schedule (id, start_time, end_time, day, instructor_id, fee_and_sal_id) VALUES(DEFAULT, '10:00', '12:00', '2022-01-19', 1, 7);
+INSERT INTO group_lesson VALUES(78, 2, 3);
+INSERT INTO ensemble VALUES(78, 2);
+
+
+CREATE VIEW number_booked_students AS 
+SELECT id, COUNT(student_id) AS booked_students 
+FROM schedule
+LEFT JOIN schedule_student ON schedule.id = schedule_student.lesson_id
+GROUP BY id
+ORDER BY id
