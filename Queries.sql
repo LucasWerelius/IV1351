@@ -1,3 +1,4 @@
+--Number of lessons per month
 SELECT 
 COUNT(*) as Total,
 COUNT(*) FILTER (WHERE fee_and_sal_id IN (SELECT id FROM fees_and_salary WHERE type_id ='1')) as Ensemble, 
@@ -7,7 +8,7 @@ FROM schedule WHERE EXTRACT(YEAR FROM day) = '2022'
 GROUP BY EXTRACT(MONTH FROM day);
 
 
-
+-- Average number of lessons per month
 SELECT 
 COUNT(*) / 12 as Total,
 COUNT(*) FILTER (WHERE fee_and_sal_id IN (SELECT id FROM fees_and_salary WHERE type_id ='1')) / 12 as Ensemble, 
@@ -15,14 +16,14 @@ COUNT(*) FILTER (WHERE fee_and_sal_id IN (SELECT id FROM fees_and_salary WHERE t
 COUNT(*) FILTER (WHERE fee_and_sal_id IN (SELECT id FROM fees_and_salary WHERE type_id ='3')) / 12 as Individual 
 FROM schedule WHERE EXTRACT(YEAR FROM day) = '2022';
 
-
+-- Given more than specific number of lessons (currently 2)
 SELECT person.first_name, person.last_name, COUNT(*) FILTER (WHERE EXTRACT(MONTH FROM day) = EXTRACT(MONTH FROM CURRENT_DATE)) as nbroflessons FROM schedule
 INNER JOIN instructor ON  schedule.instructor_id = instructor.id 
 INNER JOIN person ON instructor.person_id = person.id
 GROUP BY schedule.instructor_id, person.first_name, person.last_name
 HAVING COUNT(*) FILTER (WHERE EXTRACT(MONTH FROM day) = EXTRACT(MONTH FROM CURRENT_DATE)) > 2;
 
-
+-- List next weeks ensemble
 SELECT schedule.id, instructor_id, day, genre.genre, group_lesson.max_students, 
 CASE WHEN (max_students - booked_students) < 1 THEN 'Fully Booked' 
 WHEN (max_students - booked_students) = 1 THEN '1 Spot left' 
