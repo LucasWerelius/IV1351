@@ -315,3 +315,5 @@ INSERT INTO rented_instrument VALUES(DEFAULT, 7, 3, '2022-01-01', '2022-06-01');
 INSERT INTO rented_instrument VALUES(DEFAULT, 6, 3, '2021-01-01', '2021-06-01');
 INSERT INTO rented_instrument VALUES(DEFAULT, 11, 5, '2022-01-01', '2022-06-01');
 INSERT INTO rented_instrument VALUES(DEFAULT, 5, 1, '2021-01-01', '2021-06-01');
+
+INSERT INTO schedule VALUES(DEFAULT, '17:00', '19:00', '2022-01-08', 2, 2, 1);
