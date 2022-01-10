@@ -21,7 +21,7 @@ SELECT person.first_name, person.last_name, COUNT(*) FILTER (WHERE EXTRACT(MONTH
 INNER JOIN instructor ON  schedule.instructor_id = instructor.id 
 INNER JOIN person ON instructor.person_id = person.id
 GROUP BY schedule.instructor_id, person.first_name, person.last_name
-HAVING COUNT(*) FILTER (WHERE EXTRACT(MONTH FROM day) = EXTRACT(MONTH FROM CURRENT_DATE)) > 2
+HAVING COUNT(*) FILTER (WHERE EXTRACT(MONTH FROM day) = EXTRACT(MONTH FROM CURRENT_DATE)) > 1
 ORDER BY nbroflessons DESC;
 
 -- List next weeks ensemble
