@@ -324,4 +324,4 @@ SELECT id, COUNT(student_id) AS booked_students
 FROM schedule
 LEFT JOIN schedule_student ON schedule.id = schedule_student.lesson_id
 GROUP BY id
-ORDER BY id
+ORDER BY id;
